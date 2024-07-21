@@ -62,14 +62,14 @@ export default function HomePage() {
                         <LikeButton />
                         <div className="flex gap-2">
                           <ShareIcon />
-                          <Trash2Icon
-                            onClick={() => {
-                              if (item.author_id === user?.id) {
+                          {item.author_id === user?.id && (
+                            <Trash2Icon
+                              onClick={() => {
                                 handleDelete(item.id);
-                              }
-                            }}
-                            color="red"
-                          />
+                              }}
+                              color="red"
+                            />
+                          )}
                         </div>
                       </div>
                       <p className="text-sm">{item.likes} Likes</p>

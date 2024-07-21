@@ -29,10 +29,14 @@ export default function UserProvider({
     const {
       data: { subscription },
     } = supabase().auth.onAuthStateChange((_event, session) => {
-      if (session?.user === null) {
+      setUser(session?.user ?? null);
+      if (
+        session?.user === null ||
+        session?.user === undefined ||
+        !session?.user.id
+      ) {
         navigate("/login");
       }
-      setUser(session?.user ?? null);
     });
 
     return () => subscription.unsubscribe();
