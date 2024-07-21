@@ -6,6 +6,7 @@ import { useOutletContext } from "react-router-dom";
 import { FetchData } from "../types/types";
 import supabase from "../utils/supabase";
 import { useUser } from "../hooks/useUser";
+import { BarLoader } from "react-spinners";
 
 export default function HomePage() {
   const { data, loading, refresh } = useOutletContext<{
@@ -40,7 +41,7 @@ export default function HomePage() {
               <RefreshCcw onClick={refresh} color="hsl(200, 90%, 50%)" />
             </p>
           </div>
-          {loading && <h1 className="text-3xl font-bold m-auto">Loading...</h1>}
+          {loading && <BarLoader color="white" loading width={"100%"} />}
           {data.length > 0 && (
             <m.div
               className="flex flex-col gap-4 w-full"
