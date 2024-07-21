@@ -44,7 +44,9 @@ async function handleSubmit({
       height: 500,
     };
     console.log(newJson);
-    await sendData(newJson);
+    await sendData(newJson).then(() => {
+      window.location.href = "/";
+    });
   } else {
     console.log("Cancelled");
   }
@@ -443,7 +445,11 @@ export default function NewPostPage() {
       </div>
       <div
         className="w-[calc(100%-1rem)] relative m-2 rounded-xl"
-        style={{ background: background, minHeight: height + "px" }}
+        style={{
+          background: background,
+          maxHeight: height + "px",
+          minHeight: height + "px",
+        }}
       >
         {textItems.map((item) => (
           <Draggable

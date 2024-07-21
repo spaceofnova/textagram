@@ -12,7 +12,10 @@ function App() {
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
-      const { data } = await supabase().from("posts").select("*");
+      const { data } = await supabase()
+        .from("posts")
+        .select("*")
+        .order("created_at", { ascending: false });
       setData(data);
     };
     fetchData().then(() => {
@@ -23,7 +26,10 @@ function App() {
   const refresh = async () => {
     const fetchData = async () => {
       setLoading(true);
-      const { data } = await supabase().from("posts").select("*");
+      const { data } = await supabase()
+        .from("posts")
+        .select("*")
+        .order("created_at", { ascending: false });
       setData(data);
     };
     fetchData().then(() => {

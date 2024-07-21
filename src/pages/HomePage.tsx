@@ -36,7 +36,7 @@ export default function HomePage() {
           <div className="p-2 flex items-center justify-between">
             <h1 className="text-3xl font-bold">Textagram</h1>
             <p className="flex gap-2">
-              v0.0.1
+              v0.0.5
               <RefreshCcw onClick={refresh} color="hsl(200, 90%, 50%)" />
             </p>
           </div>
@@ -51,21 +51,25 @@ export default function HomePage() {
             >
               {data &&
                 data.map((item: FetchData) => (
-                  <div
-                    key={item.id}
-                    className="flex flex-col gap-2 w-full"
-                    style={{ height: `${item.height}px` }}
-                  >
-                    <ImageRender json={item.img} />
+                  <div key={item.id} className="flex flex-col gap-2 w-full">
+                    <ImageRender json={item.img} height={item.height} />
                     <div className="flex flex-col p-2">
                       <div className="flex items-center justify-between mb-2">
                         <LikeButton />
                         <div className="flex gap-2">
-                          <ShareIcon />
+                          <ShareIcon
+                            onClick={() => {
+                              navigator.clipboard.writeText(
+                                window.location.href + "post/" + item.id
+                              );
+                              alert("Link copied to clipboard");
+                            }}
+                          />
                           {item.author_id === user?.id && (
                             <Trash2Icon
                               onClick={() => {
                                 handleDelete(item.id);
+                                refresh();
                               }}
                               color="red"
                             />

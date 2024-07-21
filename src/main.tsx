@@ -8,6 +8,7 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import OptionsPage from "./pages/OptionsPage";
 import NewPostPage from "./pages/NewPostPage";
+import SinglePostPage from "./pages/SinglePostPage";
 
 const router = createBrowserRouter([
   {
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
       {
         path: "search",
         element: <h1>Search</h1>,
+      },
+      {
+        path: "post/:postId",
+        element: <SinglePostPage />,
       },
     ],
   },

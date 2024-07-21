@@ -12,11 +12,21 @@ interface renderObject {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export default function ImageRender({ json }: { json: renderObject }) {
+export default function ImageRender({
+  json,
+  height,
+}: {
+  json: renderObject;
+  height: number;
+}) {
   return (
     <div
       className="relative w-full h-full overflow-hidden"
-      style={{ backgroundColor: json.backgroundColor }}
+      style={{
+        backgroundColor: json.backgroundColor,
+        minHeight: height + "px",
+        maxHeight: height + "px",
+      }}
     >
       {json.textItems.map((item) => (
         <div
