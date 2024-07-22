@@ -4,6 +4,7 @@ export interface TextItem {
   position: [number, number];
   border: string;
   size: string;
+  id: string;
 }
 
 export interface renderObject {

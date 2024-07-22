@@ -54,10 +54,10 @@ export default function HomePage() {
                 data.map((item: FetchData) => (
                   <div key={item.id} className="flex flex-col gap-2 w-full">
                     <ImageRender json={item.img} height={item.height} />
-                    <div className="flex flex-col p-2">
+                    <div className="flex flex-col px-2 py-1">
                       <div className="flex items-center justify-between mb-2">
-                        <LikeButton />
-                        <div className="flex gap-2">
+                        <LikeButton likes={item.likes} />
+                        <div className="flex gap-2 border-white/20 border rounded-md p-1 px-1 transition-colors duration-300 ease-out">
                           <ShareIcon
                             onClick={() => {
                               navigator.clipboard.writeText(
@@ -77,7 +77,6 @@ export default function HomePage() {
                           )}
                         </div>
                       </div>
-                      <p className="text-sm">{item.likes} Likes</p>
                       <p>
                         <strong>{item.author}</strong> - {item.title}
                       </p>
