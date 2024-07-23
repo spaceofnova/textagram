@@ -2,8 +2,8 @@ import LikeButton from "../components/LikeButton";
 import ImageRender from "../components/ImageRender";
 import supabase from "../utils/supabase";
 import { useEffect, useState } from "react";
-import { useOutletContext, useParams } from "react-router-dom";
-import { Trash2Icon } from "lucide-react";
+import { useNavigate, useOutletContext, useParams } from "react-router-dom";
+import { ArrowLeftIcon, Trash2Icon } from "lucide-react";
 import { useUser } from "../hooks/useUser";
 
 export default function SinglePostPage() {
@@ -16,6 +16,7 @@ export default function SinglePostPage() {
   }>();
 
   const user = useUser();
+  const navigate = useNavigate();
   const handleDelete = async (id: string) => {
     const conf = confirm("Are you sure you want to delete this post?");
     if (conf) {
@@ -48,7 +49,12 @@ export default function SinglePostPage() {
   }, [postId]);
   return (
     <div>
-      <h1 className="text-3xl font-bold">Post</h1>
+      <div className="flex gap-2 items-center w-full h-12 border-b-2 border-white/10 px-2 justify-center">
+        <button className="absolute left-2" onClick={() => navigate(-1)}>
+          <ArrowLeftIcon />
+        </button>
+        <h1 className="text-2xl font-bold">Post</h1>
+      </div>
       {post && (
         <div className="flex flex-col gap-2 w-full">
           <ImageRender json={post.img} height={post.height} />

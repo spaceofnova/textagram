@@ -1,5 +1,6 @@
+import ProfileIcon from "../assets/ProfileIcon";
 import NewPostIcon from "../assets/NewPostIcon";
-import { BellIcon, HomeIcon, SearchIcon, SettingsIcon } from "lucide-react";
+import { HomeIcon, SearchIcon, Settings2Icon } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 
 export default function Navigator() {
@@ -18,22 +19,22 @@ export default function Navigator() {
       activeIcon: <SearchIcon />,
     },
     {
-      name: "New Post",
+      name: "",
       path: "/newpost",
       icon: <NewPostIcon />,
       activeIcon: <NewPostIcon />,
     },
     {
-      name: "Notifications",
-      path: "/notifications",
-      icon: <BellIcon />,
-      activeIcon: <BellIcon />,
+      name: "options",
+      path: "/options",
+      icon: <Settings2Icon />,
+      activeIcon: <Settings2Icon />,
     },
     {
-      name: "Options",
-      path: "/options",
-      icon: <SettingsIcon />,
-      activeIcon: <SettingsIcon />,
+      name: "Profile",
+      path: "/profile",
+      icon: <ProfileIcon />,
+      activeIcon: <ProfileIcon />,
     },
   ];
   return (
@@ -46,11 +47,11 @@ export default function Navigator() {
           <Link to={page.path}>
             <div className="flex h-full w-full items-center justify-center">
               {pathname === page.path ? (
-                <div className="flex h-full w-full items-center justify-center">
+                <div className="flex h-full w-full items-center justify-center gap-2 bg-white/10 rounded-md p-1">
                   {page.activeIcon}
                 </div>
               ) : (
-                <div className="flex h-full w-full items-center justify-center">
+                <div className="flex h-full w-full items-center justify-center gap-2">
                   {page.icon}
                 </div>
               )}

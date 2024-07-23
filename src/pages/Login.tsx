@@ -3,7 +3,7 @@ import { login } from "../utils/login";
 
 export default function Login() {
   return (
-    <div className="flex flex-col gap-4 items-center justify-between p-2 w-full h-screen">
+    <div className="flex flex-col gap-4 items-center justify-between p-2 w-full h-screen bg-background">
       <div className="w-full text-left">
         <h1 className="text-3xl font-bold">Login</h1>
         <p>Welcome back! Please login to continue.</p>

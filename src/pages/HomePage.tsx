@@ -37,11 +37,20 @@ export default function HomePage() {
           <div className="p-2 flex items-center justify-between">
             <h1 className="text-3xl font-bold">Textagram</h1>
             <p className="flex gap-2">
-              v0.0.5
+              v0.1.1
               <RefreshCcw onClick={refresh} color="hsl(200, 90%, 50%)" />
             </p>
           </div>
-          {loading && <BarLoader color="white" loading width={"100%"} />}
+          {loading && (
+            <m.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="w-full"
+            >
+              <BarLoader color="white" loading width={"100%"} />
+            </m.div>
+          )}
           {data.length > 0 && (
             <m.div
               className="flex flex-col gap-4 w-full"

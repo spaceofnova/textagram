@@ -3,7 +3,7 @@ import { register } from "../utils/login";
 
 export default function Signup() {
   return (
-    <div className="flex flex-col gap-4 items-center justify-between p-2 w-full h-screen">
+    <div className="flex flex-col gap-4 items-center justify-between p-2 w-full h-screen bg-background">
       <div className="w-full">
         <h1 className="text-3xl font-bold">Create an account</h1>
         <p>Welcome! Please create an account to continue.</p>

@@ -9,7 +9,7 @@
 
   color-scheme: light dark;
   color: var(--foreground);
-  background-color: var(--background);
+  background-color: black;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -37,4 +37,8 @@
   display: none; /* Safari and Chrome */
   width: 0; /* Remove scrollbar space */
   background: transparent; /* Optional: just make scrollbar invisible */
+}
+
+.App {
+  background: var(--background);
 }

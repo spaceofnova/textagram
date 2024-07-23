@@ -9,6 +9,9 @@ import Signup from "./pages/Signup";
 import OptionsPage from "./pages/OptionsPage";
 import NewPostPage from "./pages/NewPostPage";
 import SinglePostPage from "./pages/SinglePostPage";
+import ProfilePage from "./pages/ProfilePage";
+import SearchPage from "./pages/SearchPage";
+import ProfileEdit from "./pages/ProfileEdit";
 
 const router = createBrowserRouter([
   {
@@ -20,8 +23,8 @@ const router = createBrowserRouter([
         element: <HomePage />,
       },
       {
-        path: "notifications",
-        element: <h1>Notifications</h1>,
+        path: "search",
+        element: <SearchPage />,
       },
       {
         path: "newpost",
@@ -32,8 +35,12 @@ const router = createBrowserRouter([
         element: <OptionsPage />,
       },
       {
-        path: "search",
-        element: <h1>Search</h1>,
+        path: "profile",
+        element: <ProfilePage />,
+      },
+      {
+        path: "profile/edit",
+        element: <ProfileEdit />,
       },
       {
         path: "post/:postId",
