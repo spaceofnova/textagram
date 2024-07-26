@@ -60,7 +60,7 @@ export default function SinglePostPage() {
           <ImageRender json={post.img} height={post.height} />
           <div className="flex flex-col p-2">
             <div className="flex items-center justify-between mb-2">
-              <LikeButton likes={post.likes} />
+              <LikeButton oldlikes={post.likes} postID={post.id} />
               <div className="flex gap-2">
                 {/* <ShareIcon
                 onClick={() => {

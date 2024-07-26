@@ -5,10 +5,12 @@ export default function Popover({
   children,
   dismissable,
   onlyShowOnce,
+  popoverID,
 }: {
   children: JSX.Element;
   dismissable: boolean;
   onlyShowOnce: boolean;
+  popoverID?: string;
 }) {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -20,12 +22,11 @@ export default function Popover({
     };
 
     if (onlyShowOnce) {
-      const hasBeenOpened = localStorage.getItem("popoverOpened");
+      const hasBeenOpened = localStorage.getItem(popoverID ?? "popoverOpened");
       if (hasBeenOpened) {
         setIsOpen(false);
       } else {
         setIsOpen(true);
-        localStorage.setItem("popoverOpened", "true");
       }
     } else {
       setIsOpen(true);
@@ -81,7 +82,10 @@ export default function Popover({
               {dismissable && (
                 <button
                   className="w-full p-2 bg-white/10 rounded-md"
-                  onClick={() => setIsOpen(false)}
+                  onClick={() => {
+                    setIsOpen(false);
+                    localStorage.setItem(popoverID ?? "popoverOpened", "true");
+                  }}
                 >
                   {onlyShowOnce ? "Don't show again" : "Dismiss"}
                 </button>

@@ -1,5 +1,6 @@
 import { LogOutIcon } from "lucide-react";
 import supabase from "../utils/supabase";
+import ThemeSwitch from "@/components/ThemeSwitcher";
 
 export default function OptionsPage() {
   const handleLogout = async () => {
@@ -13,6 +14,7 @@ export default function OptionsPage() {
           <LogOutIcon />
         </button>
       </div>
+      <ThemeSwitch />
     </>
   );
 }

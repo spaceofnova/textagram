@@ -5,6 +5,7 @@ import { Edit2Icon, SendIcon, Trash2Icon } from "lucide-react";
 import { Dispatch, SetStateAction, useState } from "react";
 import supabase from "../utils/supabase";
 import { HexColorPicker } from "react-colorful";
+import { useUserProfile } from "../hooks/useUserProfile";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 async function sendData(json: any) {
@@ -81,22 +82,22 @@ const TextEditor = ({
       <div className="flex flex-col gap-2 w-full h-full">
         {textItems &&
           textItems.map((item) => (
-            <div key={item.text} className="flex gap-2 items-center">
+            <div
+              key={item.text}
+              className="flex gap-2 items-center"
+              onClick={() => {
+                const newText = prompt("Enter new text");
+                if (newText) {
+                  setTextItems(
+                    textItems.map((t) =>
+                      t.id === item.id ? { ...t, text: newText } : t
+                    )
+                  );
+                }
+              }}
+            >
               <div className="w-full bg-white/20 p-2 rounded-md flex gap-2 items-center justify-between">
-                <p
-                  onClick={() => {
-                    const newText = prompt("Enter new text");
-                    if (newText) {
-                      setTextItems(
-                        textItems.map((t) =>
-                          t.id === item.id ? { ...t, text: newText } : t
-                        )
-                      );
-                    }
-                  }}
-                >
-                  {item.text}
-                </p>
+                <p>{item.text}</p>
                 <Trash2Icon
                   onClick={() =>
                     setTextItems(textItems.filter((t) => t.id !== item.id))
@@ -176,6 +177,7 @@ const DescriptionEditor = ({
 };
 
 export default function NewPostPage() {
+  const { userProfile } = useUserProfile();
   const [background, setBackground] = useState<string>("#cc2c08");
   const [title, setTitle] = useState<string>("New Post");
   const [body, setBody] = useState<string>("This the description of the post");
@@ -212,7 +214,7 @@ export default function NewPostPage() {
         {textItems.map((item) => (
           <Draggable
             key={item.text}
-            defaultPosition={{ x: 12, y: 12 }}
+            defaultPosition={{ x: 200, y: 250 }}
             bounds="parent"
             defaultClassName="w-fit h-fit"
             onDrag={(_e, data) => {
@@ -245,19 +247,35 @@ export default function NewPostPage() {
       <div className="flex flex-col gap-2 px-1 w-full h-1/2">
         <div className="flex gap-2 w-full h-10">
           <button
-            className="w-full rounded-md border-white/20 border p-1"
+            className="w-full rounded-md border-white/20 border p-1 transition-colors duration-300 ease-out"
+            style={{
+              background:
+                page === "Description"
+                  ? "rgba(255,255,255,0.1)"
+                  : "rgba(0,0,0,0)",
+            }}
             onClick={() => setPage("Description")}
           >
             Description
           </button>
           <button
-            className="w-full rounded-md border-white/20 border p-1"
+            className="w-full rounded-md border-white/20 border p-1 transition-colors duration-300 ease-out"
+            style={{
+              background:
+                page === "Colors" ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0)",
+            }}
             onClick={() => setPage("Colors")}
           >
             Colors
           </button>
           <button
-            className="w-full rounded-md border-white/20 border p-1"
+            className="w-full rounded-md border-white/20 border p-1 transition-colors duration-300 ease-out"
+            style={{
+              background:
+                page === "Text Editor"
+                  ? "rgba(255,255,255,0.1)"
+                  : "rgba(0,0,0,0)",
+            }}
             onClick={() => setPage("Text Editor")}
           >
             Text
@@ -276,7 +294,7 @@ export default function NewPostPage() {
               background: background,
               title: title ?? "Untitled",
               body: body ?? "No body",
-              username: user?.user_metadata.username ?? "Anonymous",
+              username: userProfile?.username ?? "Anonymous",
               author_id: user?.id ?? "Anonymous",
             })
           }

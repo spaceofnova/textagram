@@ -25,6 +25,7 @@ export interface UserProfile {
     small: string;
     large: string;
   };
+  likes: string[];
 }
 
 export default function UserProvider({

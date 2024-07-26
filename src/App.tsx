@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import UserProvider from "./providers/UserProvider";
 import supabase from "./utils/supabase";
 import Popover from "./components/Popover";
+import { ThemeProvider } from "./components/ThemeProvider";
+// import Prompter from "./components/Prompter";
 
 const consoleWarning = () => {
   console.log("%cStop!", "color: red; font-size: 40px");
@@ -47,26 +49,36 @@ function App() {
   };
 
   return (
-    <UserProvider>
-      <Popover dismissable={true} onlyShowOnce={true}>
-        <div className="w-full h-full flex flex-col gap-2 items-center justify-center text-center">
-          <h1 className="text-3xl font-bold">Display Names!</h1>
-          <p>Customize your account by adding a display name!</p>
-          <Link to="/profile" className="text-primary font-bold text-blue-400">
-            Go to profile
-          </Link>
+    <ThemeProvider defaultTheme="dark">
+      <UserProvider>
+        {/* <Prompter /> */}
+        <Popover
+          dismissable={true}
+          onlyShowOnce={true}
+          popoverID="newThemePopup"
+        >
+          <div className="w-full h-full flex flex-col gap-2 items-center justify-center text-center">
+            <h1 className="text-3xl font-bold">New Theme!!</h1>
+            <p>You can now choose between light or dark mode in options!</p>
+            <Link
+              to="/options"
+              className="text-primary font-bold text-blue-400"
+            >
+              Go to options
+            </Link>
+          </div>
+        </Popover>
+        <div
+          className="flex flex-col h-screen w-screen App"
+          id="popover-zoom-out"
+        >
+          <div className="w-full h-full overflow-y-scroll overflow-x-hidden mb-12">
+            <Outlet context={{ data, loading, refresh }} />
+          </div>
+          <Navigator />
         </div>
-      </Popover>
-      <div
-        className="flex flex-col h-screen w-screen App"
-        id="popover-zoom-out"
-      >
-        <div className="w-full h-full overflow-y-scroll overflow-x-hidden mb-12">
-          <Outlet context={{ data, loading, refresh }} />
-        </div>
-        <Navigator />
-      </div>
-    </UserProvider>
+      </UserProvider>
+    </ThemeProvider>
   );
 }
 

@@ -38,7 +38,7 @@ export default function HomePage() {
             <h1 className="text-3xl font-bold">Textagram</h1>
             <p className="flex gap-2">
               v0.1.1
-              <RefreshCcw onClick={refresh} color="hsl(200, 90%, 50%)" />
+              <RefreshCcw onClick={refresh} color="var(--accent)" />
             </p>
           </div>
           {loading && (
@@ -65,7 +65,7 @@ export default function HomePage() {
                     <ImageRender json={item.img} height={item.height} />
                     <div className="flex flex-col px-2 py-1">
                       <div className="flex items-center justify-between mb-2">
-                        <LikeButton likes={item.likes} />
+                        <LikeButton oldlikes={item.likes} postID={item.id} />
                         <div className="flex gap-2 border-white/20 border rounded-md p-1 px-1 transition-colors duration-300 ease-out">
                           <ShareIcon
                             onClick={() => {

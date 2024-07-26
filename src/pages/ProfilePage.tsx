@@ -15,18 +15,18 @@ export default function ProfilePage() {
   const [postsLoading, setPostsLoading] = useState(true);
 
   useEffect(() => {
-    if (user) {
-      const fetchPosts = async () => {
-        const { data, error } = await supabase()
-          .from("posts")
-          .select("*")
-          .eq("author_id", user?.id);
-        if (error) {
-          return console.log(error);
-        }
-        setPosts(data);
-        setPostsLoading(false);
-      };
+    const fetchPosts = async () => {
+      const { data, error } = await supabase()
+        .from("posts")
+        .select("*")
+        .eq("author_id", user?.id);
+      if (error) {
+        return console.log(error);
+      }
+      setPosts(data);
+      setPostsLoading(false);
+    };
+    if (user && user != undefined) {
       fetchPosts();
     }
   }, [user]);
@@ -37,13 +37,13 @@ export default function ProfilePage() {
       </div>
       <div className="flex flex-col gap-2 w-full">
         <div className="flex gap-4 w-full p-2 items-center">
-          <div>
-            <img
-              src={"https://via.placeholder.com/500/500"} // userProfile?.avatar.small
+          {/* <div>
+            <img 
+              src={"https://via.placeholder.com/500/500"} // userProfile?.avatar.small // ADD FUCKING AVATAR SUPPORRT SOON
               alt="avatar"
               className="w-20 h-20 rounded-full aspect-square"
             />
-          </div>
+          </div> */}
           <div className="flex flex-col gap-2">
             <p className="text-2xl">{userProfile?.username ?? "Loading..."}</p>
             <div className="flex gap-2 w-full">

@@ -36,6 +36,7 @@ export default function ImageRender({
             top: `${item.position[1]}%`,
             left: `${item.position[0]}%`,
             background: item.color,
+            color: "white",
             border: item.border,
             fontSize: item.size,
             padding: "6px",

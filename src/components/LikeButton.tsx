@@ -1,26 +1,75 @@
+import { useUserProfile } from "@/hooks/useUserProfile";
 import { AnimatePresence, m } from "framer-motion";
 import { HeartIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 
-export default function LikeButton({ likes }: { likes: number }) {
+export default function LikeButton({
+  oldlikes,
+  postID,
+}: {
+  oldlikes: number;
+  postID: string;
+}) {
   const [isLiked, setIsLiked] = useState(false);
-  const [likesValue, setLikesValue] = useState(likes);
+  const [likesValue, setLikesValue] = useState(oldlikes);
+  const { userProfile } = useUserProfile();
 
   useEffect(() => {
-    setLikesValue(likes);
-  }, [likes]);
+    setLikesValue(oldlikes);
+    const userHasLiked = () => {
+      const isLiked = userProfile?.likes.includes(postID);
+      return isLiked === true ? true : false;
+    };
 
-  useEffect(() => {
-    if (isLiked) {
-      setLikesValue(likes + 1);
+    if (userHasLiked()) {
+      setIsLiked(true);
     } else {
-      setLikesValue(likes);
+      setIsLiked(false);
     }
-  }, [isLiked, likes]);
+  }, [oldlikes]);
+
+  const handleLike = async () => {
+    if (isLiked) {
+      setLikesValue(likesValue - 1);
+      setIsLiked(false);
+      // const { error } = await supabase()
+      //   .from("profiles")
+      //   .update({
+      //     likes: likes?.filter((id) => id === postID),
+      //   })
+      //   .eq("uuid", user?.id);
+
+      // if (error) {
+      //   console.log(error);
+      //   alert("Error UnLiking this post:" + error.message);
+      //   setLikesValue(likesValue + 1);
+      //   setIsLiked(true);
+      // }
+    } else if (!isLiked) {
+      setLikesValue(likesValue + 1);
+      setIsLiked(true);
+      // const likes = userProfile?.likes;
+      // console.log(JSON.stringify(likes?.concat(postID)));
+      // const { error } = await supabase()
+      //   .from("profiles")
+      //   .update({
+      //     likes: likes?.concat(postID),
+      //   })
+      //   .eq("uuid", user?.id);
+
+      // if (error) {
+      //   console.log(error);
+      //   alert("Error Liking this post:" + error.message);
+
+      //   setLikesValue(likesValue - 1);
+      //   setIsLiked(false);
+      // }
+    }
+  };
   return (
     <AnimatePresence mode="wait">
       <div
-        onClick={() => setIsLiked(!isLiked)}
+        onClick={() => handleLike()}
         className={
           "flex items-center justify-center gap-2 border-white/20 border rounded-md p-1 px-2 transition-all duration-300 ease-out" +
           (isLiked ? " bg-red-500/20 border-red-500" : "")

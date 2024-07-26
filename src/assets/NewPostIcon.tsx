@@ -1,6 +1,6 @@
 export default function NewPostIcon() {
   return (
-    <div className="w-14 h-8 bg-primary rounded-md flex items-center justify-center text-black">
+    <div className="w-16 h-full rounded-md flex items-center justify-center text-text">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="24"

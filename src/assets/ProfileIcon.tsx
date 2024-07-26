@@ -1,6 +1,6 @@
 export default function ProfileIcon() {
   return (
-    <div className="w-7 h-7 bg-primary rounded-full flex items-center justify-center text-black">
+    <div className="aspect-square h-full flex items-center justify-center text-text p-1">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="24"
